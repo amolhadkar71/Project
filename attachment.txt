@@ -1,0 +1,146 @@
+ package com.cg.selenium;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import com.thoughtworks.selenium.webdriven.commands.Click;
+
+public class Lab4 {
+	public static String driverpath="C:\\Users\\AMHADKAR\\Desktop\\";
+	public static void main(String[] args) throws InterruptedException {
+		
+		//step1 launching the browser
+		System.setProperty("webdriver.chrome.driver", driverpath+"chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+						
+		driver.navigate().to("http://demo.opencart.com/");
+		  driver.manage().window().maximize();
+		  
+		//step 1
+		 WebElement myAccount = driver.findElement(By.linkText("My Account"));
+		 myAccount.click();
+		 
+		 driver.findElement(By.linkText("Login")).click();
+		 
+		 WebElement uemail = driver.findElement(By.name("email"));
+		 uemail.sendKeys("amolhadkara717111@gmail.com");
+		 
+		 WebElement pwd = driver.findElement(By.name("password"));
+		 pwd.sendKeys("amolhadkar7171@");
+		 
+		 //step 2
+	     driver.findElement(By.xpath("//*[@id='content']/div/div[2]/div/form/input")).click();
+	     WebElement component = driver.findElement(By.xpath("//*[@id='menu']/div[2]/ul/li[3]/a"));
+	     component.click();
+	     ////*[@id="menu"]/div[2]/ul/li[3]/a
+	     ////*[@id="menu"]/div[2]/ul/li[3]/div/div/ul/li[2]/a
+	     //step 3
+	     driver.findElement(By.xpath("//*[@id='menu']/div[2]/ul/li[3]/a")).click();
+	     driver.findElement(By.xpath("//*[@id='menu']/div[2]/ul/li[3]/div/div/ul/li[2]/a")).click();
+	     
+	     //driver.findElement(By.xpath("//a[@href='http://demo.opencart.com/index.php?route=product/category&path=25_28']")).click();
+	     
+	     //step 4
+	     WebElement show = driver.findElement(By.xpath("//select[@id='input-limit']"));
+	     Select sel = new Select(show);
+	     sel.selectByVisibleText("25");
+	     
+	     //step 5
+	     driver.findElement(By.xpath("//*[@id='content']/div[3]/div[1]/div/div[2]/div[2]/button[1]")).click();
+	 
+	     //step 6
+	     driver.findElement(By.xpath("//*[@id='content']/div[3]/div[1]/div/div[1]/a/img")).click();
+	     
+	     //add to wishlist
+	     driver.findElement(By.xpath("//*[@id='content']/div[1]/div[2]/div[1]/button[1]/i")).click();
+	     Thread.sleep(4000);
+//	     String msg=driver.findElement(By.xpath("//*[@id='product-product']/div[1]")).getText();
+//	     System.out.println(msg);
+//	     if(msg.equals("Success: You have added Apple Cinema 30\" to your wish list!\n×"))
+//	    	 System.out.println("Success verified");
+//	     else
+//	    	 System.out.println("Success not verified");
+	     
+	   //*[@id="product-product"]/div[1]/text()[2]
+	   //*[@id="product-product"]/div[1]/text()[1]
+
+	     driver.findElement(By.xpath("//a[@href='#tab-specification']")).click();
+	     
+	     //step 7
+	     if(driver.getPageSource().contains("100mhz"))
+	         System.out.println("The clock speed is in customer specification");
+	     else
+	    	 System.out.println("The clock speed is not reached tocustomer specification");
+	     String msg=driver.findElement(By.xpath("//*[@id='product-product']/div[1]")).getText();
+	     System.out.println(msg);
+	     if(msg.equals("Success: You have added Apple Cinema 30\" to your wish list!\n×"))
+	    	 System.out.println("Success verified");
+	     else
+	    	 System.out.println("Success not verified");
+	     //step 8
+	     driver.findElement(By.xpath("//*[@id='content']/div[1]/div[2]/div[1]/button[1]")).click();
+	    
+	     //step 10
+	     driver.findElement(By.name("search")).sendKeys("Mobile");
+	     
+	     //step 11
+	     driver.findElement(By.xpath("//*[@id='search']/span/button")).click();
+	     
+	     //step 12
+	     driver.findElement(By.xpath("//*[@id='description']")).click();
+	     driver.findElement(By.xpath("//*[@id='button-search']")).click();
+	     
+	     //step 13
+	   //*[@id="content"]/div[3]/div[1]/div/div[2]/div[1]/h4/a
+	     driver.findElement(By.xpath("//*[@id='content']/div[3]/div[1]/div/div[2]/div[1]/h4/a")).click();
+	     
+	     //step 14
+	     WebElement qty = driver.findElement(By.id("input-quantity"));
+	     qty.clear();
+	     qty.sendKeys("3");
+	     
+	     //step 15
+	     driver.findElement(By.xpath("//*[@id='button-cart']")).click();
+	   
+	  
+	     //step 17
+	     driver.findElement(By.xpath("//*[@id='cart']/button")).click();
+	     
+	     //step 18
+	    String string = "HTC Touch HD";
+	    String string1 = driver.findElement(By.linkText("HTC Touch HD")).getText();
+    
+	     if(string.equals(string1))
+	    	 System.out.println("Verified");
+	     else
+	    	 System.out.println("Not verified");
+	     Thread.sleep(4000);
+	     //step 19
+	     driver.findElement(By.xpath("//*[@id='cart']/ul/li[2]/div/p/a[2]/strong")).click();
+	     Thread.sleep(4000);
+	     //step 20
+	     driver.findElement(By.xpath("//*[@id='top-links']/ul/li[2]/a/span[2]")).click();
+	     Thread.sleep(4000);
+	     //step 21
+	     driver.findElement(By.linkText("Logout")).click();
+	     
+	    //step 22
+	    String expectedHead = "Account Logout";
+	    WebElement actualHead = driver.findElement(By.xpath("//*[@id='content']/h1"));
+	    
+	    
+	    if(expectedHead.equals(actualHead.getText()))
+	         System.out.println("Account Logout is verified");
+	    else
+	    	System.out.println("Account logout is not verified");
+	    
+	    //step 23
+	    driver.findElement(By.xpath("//*[@id='content']/div/div/a")).click();
+	    driver.close();
+	}
+
+}
